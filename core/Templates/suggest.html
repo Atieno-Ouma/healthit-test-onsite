@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block body %} {% load crispy_forms_tags %}
+<div class="jumbotron">
+  <h1>{{title}}</h1>
+  <form method="POST" action="">
+    {% csrf_token %} {{form|crispy}}
+    <input type="submit" value="Search" class="btn btn-dark mb-4"/>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+          <th>ID</th>
+        <th>NAME</th>
+        <th>LOCATION</th>
+        <th>GENDER</th>
+        <th>DOB</th>
+
+
+      </tr>
+    </thead>
+    {% for instance in queryset %}
+    <tr>
+{#
+      <td>{{instance.id}}
+      </td>
+      <td>
+        {{instance.username}}
+      </td>
+      <td>{{instance.location}}</td>
+         <td>{{instance.gender}}</td>
+         <td>{{instance.DOB}}</td>
+
+      <td class="d-inline">
+        <div><a href="{% url 'add' instance.id %}"
+          ><div class="btn btn-warning">ADD FRIEND</div></a</div>
+{#
+        <div><a href="{% url 'remove' instance.id %}"
+          ><div class="btn btn-danger">Delete From List</div></a
+        ></div>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
